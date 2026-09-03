@@ -1,0 +1,1436 @@
+﻿{
+    "objectIdFieldName":  "OBJECTID",
+    "uniqueIdField":  {
+                          "name":  "OBJECTID",
+                          "isSystemMaintained":  true
+                      },
+    "globalIdFieldName":  "GlobalID",
+    "geometryProperties":  {
+                               "shapeLengthFieldName":  "Shape__Length",
+                               "units":  "esriMeters"
+                           },
+    "serverGens":  {
+                       "minServerGen":  986087,
+                       "serverGen":  986087
+                   },
+    "geometryType":  "esriGeometryPolyline",
+    "spatialReference":  {
+                             "wkid":  27700,
+                             "latestWkid":  27700
+                         },
+    "fields":  [
+                   {
+                       "name":  "OBJECTID",
+                       "type":  "esriFieldTypeOID",
+                       "alias":  "OBJECTID",
+                       "sqlType":  "sqlTypeOther",
+                       "domain":  null,
+                       "defaultValue":  null
+                   },
+                   {
+                       "name":  "StatusDescr",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "Type",
+                       "sqlType":  "sqlTypeOther",
+                       "length":  50,
+                       "domain":  null,
+                       "defaultValue":  null
+                   },
+                   {
+                       "name":  "Path_Name",
+                       "type":  "esriFieldTypeString",
+                       "alias":  "Path_Name",
+                       "sqlType":  "sqlTypeOther",
+                       "length":  60,
+                       "domain":  null,
+                       "defaultValue":  null
+                   },
+                   {
+                       "name":  "Shape__Length",
+                       "type":  "esriFieldTypeDouble",
+                       "alias":  "Shape__Length",
+                       "sqlType":  "sqlTypeDouble",
+                       "domain":  null,
+                       "defaultValue":  null
+                   },
+                   {
+                       "name":  "GlobalID",
+                       "type":  "esriFieldTypeGlobalID",
+                       "alias":  "GlobalID",
+                       "sqlType":  "sqlTypeOther",
+                       "length":  38,
+                       "domain":  null,
+                       "defaultValue":  "NEWID() WITH VALUES"
+                   }
+               ],
+    "features":  [
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4340,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 1",
+                                            "Shape__Length":  355.94100634214834,
+                                            "GlobalID":  "fe30de41-0ce2-44fb-ae01-a2882af5d532"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4341,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 10",
+                                            "Shape__Length":  786.07334687021091,
+                                            "GlobalID":  "1f124960-50f7-43f1-9cc6-53f25f9143f6"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4342,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 11a",
+                                            "Shape__Length":  344.8830939279498,
+                                            "GlobalID":  "9ad9d675-c4be-49d9-934e-5afc5669d8e8"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4343,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 11b",
+                                            "Shape__Length":  89.667990617534812,
+                                            "GlobalID":  "023ef575-453b-49e8-a61b-e7ff47dba54f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4344,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 12",
+                                            "Shape__Length":  562.29350398317683,
+                                            "GlobalID":  "d0f826c2-1930-417e-be55-cf150edf4e88"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4345,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 13",
+                                            "Shape__Length":  124.05485010181883,
+                                            "GlobalID":  "dda25a98-5465-4253-aaf5-12153a1ccbbf"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4346,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 14a",
+                                            "Shape__Length":  368.83516913877418,
+                                            "GlobalID":  "7f4a675d-9739-49b4-bc90-65688455a159"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4347,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 14b",
+                                            "Shape__Length":  380.91564529768971,
+                                            "GlobalID":  "811f136c-80d7-48d6-b612-766a2c7c3c69"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4348,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 15",
+                                            "Shape__Length":  402.00423308194178,
+                                            "GlobalID":  "c13208c7-918e-49d6-b907-b57241d35db1"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4349,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 16a",
+                                            "Shape__Length":  351.10824137459468,
+                                            "GlobalID":  "28430a56-9cb1-4fd0-bdeb-aaad420eddb7"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4350,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 16b",
+                                            "Shape__Length":  275.77388873465185,
+                                            "GlobalID":  "bfa4e2ef-71ad-4741-9eee-0e1144efba0b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4351,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 16c",
+                                            "Shape__Length":  44.208404303028416,
+                                            "GlobalID":  "fd3f2873-da95-44e2-bd4a-5c86099ec7ec"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4352,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 17a",
+                                            "Shape__Length":  151.46614140126314,
+                                            "GlobalID":  "dc9b2f16-0718-4577-a6c6-83adeb1fec4c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4353,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 17b",
+                                            "Shape__Length":  361.21660797256783,
+                                            "GlobalID":  "87c9e569-3a9d-4e8c-a17a-ec56a0def5bd"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4354,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 17c",
+                                            "Shape__Length":  123.69933399647977,
+                                            "GlobalID":  "20438b78-cea0-41aa-8ac4-41d2a8e3afa6"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4355,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 17d",
+                                            "Shape__Length":  113.70209966974431,
+                                            "GlobalID":  "ee0a5bec-502f-44e4-ba78-69e1df1ef113"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4356,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 18a",
+                                            "Shape__Length":  236.40384356912668,
+                                            "GlobalID":  "adeb561d-837b-4193-972f-7deca788d608"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4357,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 18b",
+                                            "Shape__Length":  187.40401020957583,
+                                            "GlobalID":  "75db03f4-8e2e-4f06-bc57-1092edc28bae"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4358,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 19a",
+                                            "Shape__Length":  207.53704217375807,
+                                            "GlobalID":  "f446d794-a384-4869-bfcd-a3ba47d7b59b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4359,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 19b",
+                                            "Shape__Length":  41.758750924862,
+                                            "GlobalID":  "969e87a2-ba33-4531-b4c6-2dcd717ce3ac"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4360,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 19c",
+                                            "Shape__Length":  128.29775402740592,
+                                            "GlobalID":  "6a9a4863-0cb7-43f6-85da-92d4b6a55283"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4361,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 2",
+                                            "Shape__Length":  113.72900118158476,
+                                            "GlobalID":  "4c1e6515-716a-41d6-b069-ec98300bdb21"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4362,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 20a",
+                                            "Shape__Length":  136.75112550235059,
+                                            "GlobalID":  "b4c28666-713f-465b-a263-1b4c85e51693"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4363,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 20b",
+                                            "Shape__Length":  371.28105122590654,
+                                            "GlobalID":  "55190b05-d340-4318-899c-7cf4fd232768"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4364,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 21a",
+                                            "Shape__Length":  279.80992069393676,
+                                            "GlobalID":  "353ac812-1da1-44cd-963d-2f281b9dfecd"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4365,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 21b",
+                                            "Shape__Length":  134.76029835237117,
+                                            "GlobalID":  "14205a6c-2eed-4c38-9b7d-9a0a74308dea"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4366,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22a",
+                                            "Shape__Length":  492.57905209457658,
+                                            "GlobalID":  "6a4f2dc8-865b-4235-80c8-887411afd284"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4367,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22b",
+                                            "Shape__Length":  210.07642314712754,
+                                            "GlobalID":  "a4425796-60af-4222-8d45-5c1b2b0a7149"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4368,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22c",
+                                            "Shape__Length":  105.36848083956542,
+                                            "GlobalID":  "061751bd-e400-4889-a3f5-25e8e52fb878"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4369,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22d",
+                                            "Shape__Length":  470.54316948119742,
+                                            "GlobalID":  "c7b3ce3e-f7c4-44a6-864a-145b330155f2"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4370,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22e",
+                                            "Shape__Length":  234.31283576342875,
+                                            "GlobalID":  "d048e70b-22de-4e97-b0ec-a30736c6cf11"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4371,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22f",
+                                            "Shape__Length":  112.86298146293227,
+                                            "GlobalID":  "8b4860a9-99a7-4be1-9e7a-94dcbbbe8a58"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4372,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22g",
+                                            "Shape__Length":  803.057932891409,
+                                            "GlobalID":  "4ec39570-9f68-4c9a-a10f-b43ca2772550"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4373,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 22h",
+                                            "Shape__Length":  84.864113832588686,
+                                            "GlobalID":  "ff8e4741-f66e-4b28-9ec0-9e123bb597aa"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4374,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 23",
+                                            "Shape__Length":  705.91353782976671,
+                                            "GlobalID":  "08bcbd46-102d-4203-bc43-7a16b32234d4"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4375,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 24",
+                                            "Shape__Length":  155.41057578160687,
+                                            "GlobalID":  "31fe1ec3-d1f3-4dbb-81a4-b92e47cad1f7"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4376,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 25",
+                                            "Shape__Length":  57.844124691521706,
+                                            "GlobalID":  "0c8d781c-b045-4023-919f-6a8a40585dd5"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4377,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 26",
+                                            "Shape__Length":  120.94790239158829,
+                                            "GlobalID":  "26b11192-59c2-45fa-bd10-7bb6a3c5985d"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4378,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 27a",
+                                            "Shape__Length":  97.5090568905971,
+                                            "GlobalID":  "05ccbebc-5973-4dca-97dd-8b0eff3e551f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4379,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 27b",
+                                            "Shape__Length":  70.277096734494663,
+                                            "GlobalID":  "c878ce43-bc1d-4532-a692-a9a12507e9ff"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4380,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 27c",
+                                            "Shape__Length":  233.26147493363985,
+                                            "GlobalID":  "0cdd4b9a-a71a-45bd-bff8-10ba50bd3e0e"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4381,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 28a",
+                                            "Shape__Length":  303.20141607156575,
+                                            "GlobalID":  "7ce83f1a-66e9-4b3b-aea3-586971e478aa"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4382,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 28b",
+                                            "Shape__Length":  111.31744301213622,
+                                            "GlobalID":  "fa7f06cf-a046-45fb-b043-0b29b41802d5"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4383,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 29a",
+                                            "Shape__Length":  233.5258598472185,
+                                            "GlobalID":  "1d6da563-5fa1-4471-afc2-d7760b74157c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4384,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 29b",
+                                            "Shape__Length":  45.948794886180657,
+                                            "GlobalID":  "c5a467d9-5f9e-49c0-ab23-d896fcc0e428"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4385,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 29c",
+                                            "Shape__Length":  61.07221340427472,
+                                            "GlobalID":  "8c59aaf8-7dff-4ca9-8222-66e779dd25fd"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4386,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 3a",
+                                            "Shape__Length":  418.82055403627493,
+                                            "GlobalID":  "a05ed59e-c011-4815-8609-6f1a8f52515e"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4387,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 3b",
+                                            "Shape__Length":  117.32661432983775,
+                                            "GlobalID":  "3fd51320-618a-44c3-a436-edd1cd3c10ee"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4388,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 30a",
+                                            "Shape__Length":  211.65535281311895,
+                                            "GlobalID":  "af159120-3edb-4f4f-a6b3-183c3d2606f8"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4389,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 30b",
+                                            "Shape__Length":  41.60585808951231,
+                                            "GlobalID":  "159b235b-2d79-42b0-b1a3-1fac4ad66248"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4390,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 30c",
+                                            "Shape__Length":  195.60726986227112,
+                                            "GlobalID":  "a44407aa-8af4-4037-8a38-5ba1ca66a61d"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4391,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 31a",
+                                            "Shape__Length":  220.27828623611947,
+                                            "GlobalID":  "3032ccb5-4f2d-4065-99c9-5f6a5a7ddf71"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4392,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 31b",
+                                            "Shape__Length":  163.59093943967673,
+                                            "GlobalID":  "a6e752db-1bb0-4b23-9210-3f2a201999f8"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4393,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 32",
+                                            "Shape__Length":  261.837864800542,
+                                            "GlobalID":  "2f0c8abc-74dc-471a-8efb-e0b503338106"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4394,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 33a",
+                                            "Shape__Length":  376.02429067675314,
+                                            "GlobalID":  "80f8d71b-6027-4430-aff2-f9990bd82de5"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4395,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 33b",
+                                            "Shape__Length":  159.139067890158,
+                                            "GlobalID":  "2d929209-b095-47bd-9822-085c00296729"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4396,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 34",
+                                            "Shape__Length":  394.87591144275024,
+                                            "GlobalID":  "4eb08c6a-9f24-4339-b5a2-f1cd69143960"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4397,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 35",
+                                            "Shape__Length":  407.43415949638353,
+                                            "GlobalID":  "d92cf052-2139-4fe9-969e-dfb0b174fdef"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4398,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 36",
+                                            "Shape__Length":  442.632037905119,
+                                            "GlobalID":  "de18065b-7311-4d97-b7fa-c3d126ba7236"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4399,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 37a",
+                                            "Shape__Length":  242.92809518677706,
+                                            "GlobalID":  "115fa8d7-d0cc-48ca-8a82-2cf45a0437ad"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4400,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 37b",
+                                            "Shape__Length":  278.49168773489691,
+                                            "GlobalID":  "d3e3fbee-43aa-4339-aae3-24eba24d6104"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4401,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 38a",
+                                            "Shape__Length":  154.64530338674717,
+                                            "GlobalID":  "38e9a209-e4cc-48d2-be72-9b1cae1d21ed"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4402,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 38b",
+                                            "Shape__Length":  59.558344132990833,
+                                            "GlobalID":  "cb1cd387-fa58-43fc-a485-17cdc9197ac1"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4403,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 39a",
+                                            "Shape__Length":  253.53046437452014,
+                                            "GlobalID":  "650d6b09-3387-4797-a631-768c4ef17fb7"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4404,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 39b",
+                                            "Shape__Length":  517.20868542266385,
+                                            "GlobalID":  "d496d027-bbfa-44f9-9426-cfd14fdc1fc2"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4405,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 4a",
+                                            "Shape__Length":  10.678302984135929,
+                                            "GlobalID":  "7609b19f-0c28-4d72-b105-c33600615aab"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4406,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 4b",
+                                            "Shape__Length":  228.89684785277927,
+                                            "GlobalID":  "ea36d1e5-8047-47fc-9e1a-90bb8a6b7e8c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4407,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 4c",
+                                            "Shape__Length":  574.70034598576115,
+                                            "GlobalID":  "584db834-3951-406b-9c01-c90916a6a772"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4408,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 40",
+                                            "Shape__Length":  329.8627836770325,
+                                            "GlobalID":  "57ad3eec-3b32-43e0-babe-e9d76a4104d2"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4409,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 41",
+                                            "Shape__Length":  587.64866962257281,
+                                            "GlobalID":  "b6b35c2f-91e4-40d2-88aa-5fa4d53ca7dc"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4410,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 42",
+                                            "Shape__Length":  149.90661330038569,
+                                            "GlobalID":  "5a1711f6-345f-449e-a17a-84bb7da0e2e6"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4411,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43a",
+                                            "Shape__Length":  181.77320614446182,
+                                            "GlobalID":  "bb23596b-c0fa-4c7d-9075-35820bfb0275"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4412,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43b",
+                                            "Shape__Length":  74.921148223984332,
+                                            "GlobalID":  "c93e182e-ce6a-4a00-b9e1-88ccadb87991"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4413,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43c",
+                                            "Shape__Length":  104.11647138494543,
+                                            "GlobalID":  "db90eac8-d484-4e0b-a9fe-1978af66aa83"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4414,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43d",
+                                            "Shape__Length":  169.15343308571136,
+                                            "GlobalID":  "30faf465-378f-4370-97aa-9341ff113c6c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4415,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43e",
+                                            "Shape__Length":  268.19365094832932,
+                                            "GlobalID":  "2efec8df-c239-4967-bdfe-4d235715ab10"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4416,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43f",
+                                            "Shape__Length":  79.2960047650601,
+                                            "GlobalID":  "6674f39b-1a49-48d1-83bf-8d8b2a6eada7"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4417,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43g",
+                                            "Shape__Length":  275.76381184031908,
+                                            "GlobalID":  "36fb1e53-aad7-4b87-9038-6ae7e19ca88b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4418,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 43h",
+                                            "Shape__Length":  173.81210275283885,
+                                            "GlobalID":  "e5906509-4872-4d08-8215-bcef73d1c00d"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4419,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 44",
+                                            "Shape__Length":  230.79471735890635,
+                                            "GlobalID":  "065847f9-f346-4b49-b16b-d2538170eaf9"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4420,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 45a",
+                                            "Shape__Length":  398.31973191387942,
+                                            "GlobalID":  "7fb96f4c-811f-4bce-bcdd-fa750b1707d5"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4421,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 45b",
+                                            "Shape__Length":  284.00538777311021,
+                                            "GlobalID":  "2c6b02e5-0478-46ed-9d32-6aff0bd8b0a2"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4422,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 46a",
+                                            "Shape__Length":  86.199773323724173,
+                                            "GlobalID":  "1bec9700-0a54-4afa-a234-5570bcc5de2c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4423,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 46b",
+                                            "Shape__Length":  770.13800317019843,
+                                            "GlobalID":  "60180ff1-8e12-4aa0-966e-61375de6a81c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4424,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 46c",
+                                            "Shape__Length":  528.32010495111649,
+                                            "GlobalID":  "8a764eee-87df-43de-a17f-6a1274ad3174"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4425,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 46d",
+                                            "Shape__Length":  211.12784050196021,
+                                            "GlobalID":  "9b31d726-5f5d-45c4-aec5-c624c93fb8c0"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4426,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 46e",
+                                            "Shape__Length":  280.66400021298153,
+                                            "GlobalID":  "54533dc0-6600-47c9-949e-859b02d66ead"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4427,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 47a",
+                                            "Shape__Length":  316.05411583516832,
+                                            "GlobalID":  "4cf733ad-9789-4a84-94d4-a243e41cda81"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4428,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 47b",
+                                            "Shape__Length":  757.90829862287512,
+                                            "GlobalID":  "d07f3904-e11b-4fd2-9beb-90f056e5f46b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4429,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 47c",
+                                            "Shape__Length":  176.50193136261922,
+                                            "GlobalID":  "dd335a54-9043-4825-87d9-5501e0c1513e"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4430,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 47d",
+                                            "Shape__Length":  1028.0028188031076,
+                                            "GlobalID":  "79cf335e-b23b-4e55-a3a6-024eee991a44"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4431,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 48a",
+                                            "Shape__Length":  170.87492857222537,
+                                            "GlobalID":  "166bafcc-7ffb-4fb6-9c8f-54d387b6041f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4432,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 48b",
+                                            "Shape__Length":  60.451912207937234,
+                                            "GlobalID":  "ee374292-e03a-469a-8252-d3f4fa3ba5dc"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4433,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 48c",
+                                            "Shape__Length":  401.24261027237156,
+                                            "GlobalID":  "b942dcbb-d7eb-4e8c-8f5f-ae205cfe970c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4434,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 48d",
+                                            "Shape__Length":  204.57858361103041,
+                                            "GlobalID":  "3ac89f82-401b-429a-b76b-c512fe06d786"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4435,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 49",
+                                            "Shape__Length":  511.13224498763589,
+                                            "GlobalID":  "17934a6a-6bba-41ab-8010-24da9b779c6c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4436,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 5a",
+                                            "Shape__Length":  191.82964941499668,
+                                            "GlobalID":  "da37dcae-9e5d-4701-b007-465652e33b97"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4437,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 5b",
+                                            "Shape__Length":  107.79716588948641,
+                                            "GlobalID":  "a2d0ce46-05f7-4937-88b5-cf6876a8d1f3"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4438,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 50",
+                                            "Shape__Length":  491.14377539756629,
+                                            "GlobalID":  "e615985c-1bc0-4a9d-bac5-c04d445c5636"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4439,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 51a",
+                                            "Shape__Length":  128.62893351418083,
+                                            "GlobalID":  "9763e74f-e0ce-4913-8533-6e2e7efc8dde"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4440,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 51b",
+                                            "Shape__Length":  859.22954084813546,
+                                            "GlobalID":  "241b2918-0e0e-47a6-a749-3f0f38606f80"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4441,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 52",
+                                            "Shape__Length":  158.39659459796547,
+                                            "GlobalID":  "874fdb93-e27c-4a0d-b047-15135509668b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4442,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 53",
+                                            "Shape__Length":  280.26844333002447,
+                                            "GlobalID":  "1d00292a-e96e-4f7e-bfeb-7d4a4b4a079a"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4443,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 54a",
+                                            "Shape__Length":  102.73456378032539,
+                                            "GlobalID":  "829dcb69-9f73-4c6f-b495-bfbcfd84e516"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4444,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 54b",
+                                            "Shape__Length":  229.28875275120345,
+                                            "GlobalID":  "869c13d5-689b-440c-b3c1-535c52cf1cc6"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4445,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 55a",
+                                            "Shape__Length":  826.63712438594484,
+                                            "GlobalID":  "9c0ac65a-c53e-4fd7-b6be-d66f7b2bc27f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4446,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 55b",
+                                            "Shape__Length":  573.01594490393211,
+                                            "GlobalID":  "633fca3d-c416-4e71-91ba-bbccad568643"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4447,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 56",
+                                            "Shape__Length":  839.00044225232807,
+                                            "GlobalID":  "8539e94f-b4d0-4b12-96ed-457724e40736"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4448,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 57a",
+                                            "Shape__Length":  815.89985232200286,
+                                            "GlobalID":  "fb4f909e-43a2-4373-956d-baf72032d07f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4449,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 57b",
+                                            "Shape__Length":  295.69963971235461,
+                                            "GlobalID":  "1d88937c-075a-4e12-9ca4-39d76e4d707d"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4450,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 57c",
+                                            "Shape__Length":  22.69793278823272,
+                                            "GlobalID":  "f8f53798-4ebb-4cc3-ac86-daa8c309173c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4451,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 57d",
+                                            "Shape__Length":  59.589747822213255,
+                                            "GlobalID":  "0977e965-5e71-4568-b3b9-0e30cd2be2a1"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4452,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 58",
+                                            "Shape__Length":  43.896991135085131,
+                                            "GlobalID":  "98e10b1a-76b7-4b7e-9f3e-91362ea1cc77"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4453,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 59",
+                                            "Shape__Length":  900.62154590430941,
+                                            "GlobalID":  "3eea4f23-f2ea-455a-bafe-d8cbae812eb7"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4454,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 6a",
+                                            "Shape__Length":  118.3027825232989,
+                                            "GlobalID":  "dccd41df-b729-498a-8402-84355cf2968c"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4455,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 6b",
+                                            "Shape__Length":  124.32895033465277,
+                                            "GlobalID":  "800d1ba2-fdbe-4c2d-9639-5efbc7c92727"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4456,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 60",
+                                            "Shape__Length":  162.06693644863378,
+                                            "GlobalID":  "863928c0-0a72-4566-a371-772b63f18917"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4457,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 61a",
+                                            "Shape__Length":  402.44188558338305,
+                                            "GlobalID":  "cb72a3c5-27fe-4939-a389-bce8af424865"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4458,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 61b",
+                                            "Shape__Length":  559.03257862015278,
+                                            "GlobalID":  "90463fd8-80a1-4501-9367-f91f52f32070"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4459,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 61c",
+                                            "Shape__Length":  305.33868515870444,
+                                            "GlobalID":  "d63b1276-3365-49bd-9eb1-3524fdef953f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4460,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 62",
+                                            "Shape__Length":  1080.7622633547032,
+                                            "GlobalID":  "ffd23997-9d77-46a5-958c-aae4bc87c79b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4461,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 63",
+                                            "Shape__Length":  337.97938047863687,
+                                            "GlobalID":  "a4f247e6-1aff-4c74-9155-f0b003c89531"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4462,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 64",
+                                            "Shape__Length":  312.59521794029513,
+                                            "GlobalID":  "112efd33-4197-4b74-af3a-320dc4550750"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4463,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 66a",
+                                            "Shape__Length":  541.73440480730665,
+                                            "GlobalID":  "6cbaa109-d6f0-447a-895c-14ca473bd70d"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4464,
+                                            "StatusDescr":  "Bridleway",
+                                            "Path_Name":  "Hellingly 66b",
+                                            "Shape__Length":  210.92611330930717,
+                                            "GlobalID":  "30075291-3bac-40dc-87d8-f0fb04045881"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4465,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 67",
+                                            "Shape__Length":  868.967737292498,
+                                            "GlobalID":  "191503de-3cd3-4c1d-ab11-ae2e1e992e13"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4466,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 68a",
+                                            "Shape__Length":  245.43088875362287,
+                                            "GlobalID":  "c257d5c2-9793-48d2-b948-a15aed4bed83"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4467,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 68b",
+                                            "Shape__Length":  193.66453978943343,
+                                            "GlobalID":  "19aa4be5-65cd-4f04-8339-c0a6a9f8dc31"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4468,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 68c",
+                                            "Shape__Length":  187.44850191085365,
+                                            "GlobalID":  "1d0f1fee-b398-4f70-8b42-c9d593b392bc"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4469,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 69a",
+                                            "Shape__Length":  215.27624905528083,
+                                            "GlobalID":  "69b50a62-1f3c-4ece-8e3d-042a6993b35b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4470,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 69b",
+                                            "Shape__Length":  120.73866231078733,
+                                            "GlobalID":  "65a0c29e-0ebb-4d3d-b749-1055d30bdf54"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4471,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 69c",
+                                            "Shape__Length":  793.19224184891323,
+                                            "GlobalID":  "d2ced5f9-9931-49eb-904b-3560ff722d1d"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4472,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 69d",
+                                            "Shape__Length":  467.04602207325456,
+                                            "GlobalID":  "7873bd93-43fe-40bd-8b56-ec0032372e25"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4473,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 7a",
+                                            "Shape__Length":  213.6787319840098,
+                                            "GlobalID":  "ff658a54-a24c-436d-8c9a-5b6f58c800f5"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4474,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 7b",
+                                            "Shape__Length":  97.665450035316127,
+                                            "GlobalID":  "11b51c6e-ed3c-4aa4-8828-c9e49e4d0eb4"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4475,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 7c",
+                                            "Shape__Length":  194.12086913366346,
+                                            "GlobalID":  "91f59c71-300e-4462-8bc3-824cdfc02059"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4476,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 7d",
+                                            "Shape__Length":  64.045104749508027,
+                                            "GlobalID":  "36c5cf6a-eb22-49bc-bcff-592fd0927c18"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4477,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 70",
+                                            "Shape__Length":  656.77184596362827,
+                                            "GlobalID":  "44187d41-f5eb-4a06-b4b5-8d10f89d51b7"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4478,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 71a",
+                                            "Shape__Length":  572.89991142014389,
+                                            "GlobalID":  "6f95ddf9-fb2f-474d-9ed4-678873228142"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4479,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 71b",
+                                            "Shape__Length":  245.79377696306679,
+                                            "GlobalID":  "d9d7ccaf-dc9a-4243-90a6-76322136ad5b"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4480,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 72a",
+                                            "Shape__Length":  426.26455959364154,
+                                            "GlobalID":  "ab902e63-5e5e-4773-8110-1648e8774e89"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4481,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 72b",
+                                            "Shape__Length":  285.37800594967706,
+                                            "GlobalID":  "59c1e566-3067-457f-8ee8-776193d7c67f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4482,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 72c",
+                                            "Shape__Length":  1351.81050674591,
+                                            "GlobalID":  "e54d7c03-28a7-4e83-aead-14497e8e7d32"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4483,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 72d",
+                                            "Shape__Length":  829.22020881146807,
+                                            "GlobalID":  "8eacb08f-3190-40fc-b54a-ba04e7f85468"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4484,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 72e",
+                                            "Shape__Length":  425.66506948035152,
+                                            "GlobalID":  "3d4fd651-7809-40fd-bbad-f9b591af6bcf"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4485,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 73",
+                                            "Shape__Length":  404.07634362480383,
+                                            "GlobalID":  "553b044b-a019-4188-bea7-e7403e3842cf"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4486,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 74",
+                                            "Shape__Length":  384.56852064868195,
+                                            "GlobalID":  "d8829040-83d4-423d-91af-29e7336a96c3"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4487,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 75",
+                                            "Shape__Length":  621.80482895127614,
+                                            "GlobalID":  "d0db6fc1-93b5-4ef6-97ef-637c1d7d67a2"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4488,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 8",
+                                            "Shape__Length":  229.67336559690182,
+                                            "GlobalID":  "3d9ff340-dc3b-429e-a8d4-8337b5fdc436"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4489,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 9a",
+                                            "Shape__Length":  44.743944177071505,
+                                            "GlobalID":  "903a8f5e-35ee-4013-8d12-d071e28c6821"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4490,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 9b",
+                                            "Shape__Length":  45.539280985791542,
+                                            "GlobalID":  "75e0dc25-f91e-401f-9699-a31e5f40c68f"
+                                        }
+                     },
+                     {
+                         "attributes":  {
+                                            "OBJECTID":  4491,
+                                            "StatusDescr":  "Footpath",
+                                            "Path_Name":  "Hellingly 9c",
+                                            "Shape__Length":  113.12040935687806,
+                                            "GlobalID":  "a39257fe-a333-4341-8c52-37e243962554"
+                                        }
+                     }
+                 ]
+}
