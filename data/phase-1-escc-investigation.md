@@ -122,6 +122,16 @@ Question: does one path code map to one geographic feature?
 
 Recommendation for the POC: treat each `Path_Name` as one inspectable `Path`. Do not merge `22a`–`22h` into one inspection record unless a later product decision says otherwise. That matches how wardens already talk about sections.
 
+Reporting-map path codes can be derived from `Path_Name`:
+
+| Path_Name | pathCode |
+| --- | --- |
+| `Hellingly 49` | `HEL/49/1` |
+| `Hellingly 22a` | `HEL/22/1` |
+| `Hellingly 13d` | `HEL/13/4` |
+
+Rule: parish abbreviation = first three letters of the parish name; section = `1` when unlettered or `a`, then `b`→`2`, `c`→`3`, etc.
+
 Suggested mapping:
 
 ```text
