@@ -1,46 +1,49 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { Path } from "./domain/path";
+import type { Inspection, InspectionCondition } from "./domain/inspection";
+import {
+  currentInspectionYear,
+  latestInspection,
+  pathStatusForYear,
+  statusByPathId,
+} from "./domain/inspection";
 import { pathsFromEsccFeatureCollection } from "./escc/adapter";
+import { localInspectionStore } from "./storage/inspectionStore";
 import PathMap from "./components/PathMap";
-
-function formatLength(metres?: number): string {
-  if (metres == null) return "Unknown length";
-  if (metres >= 1000) return `${(metres / 1000).toFixed(2)} km`;
-  return `${Math.round(metres)} m`;
-}
-
-function formatType(type: Path["type"]): string {
-  switch (type) {
-    case "footpath":
-      return "Footpath";
-    case "bridleway":
-      return "Bridleway";
-    case "restricted_byway":
-      return "Restricted byway";
-    case "byway":
-      return "Byway";
-    default:
-      return "Unknown";
-  }
-}
+import PathDetails from "./components/PathDetails";
+import InspectionForm from "./components/InspectionForm";
+import MapLegend from "./components/MapLegend";
 
 export default function App() {
+  const year = currentInspectionYear();
   const [paths, setPaths] = useState<Path[]>([]);
+  const [inspections, setInspections] = useState<Inspection[]>([]);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [selectedPath, setSelectedPath] = useState<Path | null>(null);
+  const [recording, setRecording] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  const statuses = useMemo(
+    () => statusByPathId(inspections, year),
+    [inspections, year],
+  );
 
   useEffect(() => {
     let cancelled = false;
 
-    async function loadPaths() {
+    async function load() {
       try {
-        const response = await fetch("/samples/hellingly.geojson");
-        if (!response.ok) {
-          throw new Error(`Failed to load paths (${response.status})`);
+        const [pathResponse, stored] = await Promise.all([
+          fetch("/samples/hellingly.geojson"),
+          localInspectionStore.list(),
+        ]);
+        if (!pathResponse.ok) {
+          throw new Error(`Failed to load paths (${pathResponse.status})`);
         }
-        const collection = (await response.json()) as GeoJSON.FeatureCollection;
+        const collection = (await pathResponse.json()) as GeoJSON.FeatureCollection;
         if (!cancelled) {
           setPaths(pathsFromEsccFeatureCollection(collection));
+          setInspections(stored);
         }
       } catch (error) {
         if (!cancelled) {
@@ -49,18 +52,46 @@ export default function App() {
       }
     }
 
-    void loadPaths();
+    void load();
     return () => {
       cancelled = true;
     };
   }, []);
+
+  const selectedInspections = selectedPath
+    ? inspections.filter((inspection) => inspection.pathId === selectedPath.id)
+    : [];
+  const selectedStatus = selectedPath
+    ? pathStatusForYear(selectedInspections, year)
+    : "not_inspected";
+
+  async function saveInspection(input: {
+    inspectedAt: string;
+    condition: InspectionCondition;
+    notes?: string;
+  }) {
+    if (!selectedPath) return;
+    setSaving(true);
+    try {
+      const created = await localInspectionStore.create({
+        pathId: selectedPath.id,
+        inspectedAt: input.inspectedAt,
+        condition: input.condition,
+        notes: input.notes,
+      });
+      setInspections((current) => [...current, created]);
+      setRecording(false);
+    } finally {
+      setSaving(false);
+    }
+  }
 
   return (
     <div className="relative flex h-full flex-col bg-slate-100 text-slate-900">
       <header className="z-10 flex items-center justify-between border-b border-slate-200 bg-white px-4 py-3 shadow-sm">
         <div>
           <h1 className="text-lg font-semibold tracking-tight">Footpath Warden</h1>
-          <p className="text-sm text-slate-500">Hellingly · map prototype</p>
+          <p className="text-sm text-slate-500">Hellingly · {year} inspections</p>
         </div>
         <p className="text-sm text-slate-600">
           {paths.length > 0 ? `${paths.length} paths` : "Loading…"}
@@ -77,52 +108,45 @@ export default function App() {
             Loading Hellingly paths…
           </div>
         ) : (
-          <PathMap
-            paths={paths}
-            selectedPathId={selectedPath?.id ?? null}
-            onSelectPath={setSelectedPath}
-          />
+          <>
+            <PathMap
+              paths={paths}
+              statuses={statuses}
+              selectedPathId={selectedPath?.id ?? null}
+              onSelectPath={(path) => {
+                if (recording && path == null) return;
+                setSelectedPath(path);
+                setRecording(false);
+              }}
+            />
+            <MapLegend />
+          </>
         )}
 
         {selectedPath ? (
-          <aside className="absolute inset-x-3 bottom-3 z-10 rounded-xl border border-slate-200 bg-white p-4 shadow-lg sm:inset-x-auto sm:right-3 sm:bottom-3 sm:w-80">
-            <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
-              Path
-            </p>
-            <h2 className="mt-1 text-xl font-semibold">{selectedPath.pathCode}</h2>
-            <dl className="mt-3 space-y-2 text-sm">
-              <div className="flex justify-between gap-4">
-                <dt className="text-slate-500">Name</dt>
-                <dd className="text-right font-medium">{selectedPath.name}</dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt className="text-slate-500">Type</dt>
-                <dd className="text-right font-medium">
-                  {formatType(selectedPath.type)}
-                </dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt className="text-slate-500">Length</dt>
-                <dd className="text-right font-medium">
-                  {formatLength(selectedPath.lengthMetres)}
-                </dd>
-              </div>
-              <div className="flex justify-between gap-4">
-                <dt className="text-slate-500">Parish</dt>
-                <dd className="text-right font-medium">{selectedPath.parish}</dd>
-              </div>
-            </dl>
-            <button
-              type="button"
-              className="mt-4 w-full rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
-              onClick={() => setSelectedPath(null)}
-            >
-              Close
-            </button>
+          <aside className="absolute inset-x-3 bottom-3 z-10 max-h-[70%] overflow-y-auto rounded-xl border border-slate-200 bg-white p-4 shadow-lg sm:inset-x-auto sm:right-3 sm:bottom-3 sm:w-80">
+            {recording ? (
+              <InspectionForm
+                pathCode={selectedPath.pathCode}
+                saving={saving}
+                onCancel={() => setRecording(false)}
+                onSave={saveInspection}
+              />
+            ) : (
+              <PathDetails
+                path={selectedPath}
+                year={year}
+                status={selectedStatus}
+                latestThisYear={latestInspection(selectedInspections, year)}
+                lastInspection={latestInspection(selectedInspections)}
+                onClose={() => setSelectedPath(null)}
+                onRecord={() => setRecording(true)}
+              />
+            )}
           </aside>
         ) : paths.length > 0 ? (
           <p className="pointer-events-none absolute inset-x-3 bottom-3 z-10 rounded-lg bg-white/90 px-3 py-2 text-center text-sm text-slate-600 shadow sm:inset-x-auto sm:left-3 sm:right-auto">
-            Tap a path to see its code
+            Tap a path to record an inspection
           </p>
         ) : null}
       </main>

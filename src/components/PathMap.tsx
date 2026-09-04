@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import type { Path } from "../domain/path";
+import type { PathStatus } from "../domain/inspection";
 import { pathsToFeatureCollection } from "../escc/adapter";
 
 const SOURCE_ID = "paths";
@@ -30,24 +31,43 @@ function boundsFromPaths(paths: Path[]): maplibregl.LngLatBoundsLike | null {
   return hasPoint ? bounds : null;
 }
 
+function collectionWithStatus(
+  paths: Path[],
+  statuses: Map<string, PathStatus>,
+): GeoJSON.FeatureCollection {
+  const collection = pathsToFeatureCollection(paths);
+  for (const feature of collection.features) {
+    const id = String(feature.properties?.id ?? "");
+    feature.properties = {
+      ...feature.properties,
+      status: statuses.get(id) ?? "not_inspected",
+    };
+  }
+  return collection;
+}
+
 interface PathMapProps {
   paths: Path[];
+  statuses: Map<string, PathStatus>;
   selectedPathId: string | null;
   onSelectPath: (path: Path | null) => void;
 }
 
 export default function PathMap({
   paths,
+  statuses,
   selectedPathId,
   onSelectPath,
 }: PathMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);
   const pathsRef = useRef(paths);
+  const statusesRef = useRef(statuses);
   const onSelectRef = useRef(onSelectPath);
   const fittedRef = useRef(false);
 
   pathsRef.current = paths;
+  statusesRef.current = statuses;
   onSelectRef.current = onSelectPath;
 
   useEffect(() => {
@@ -73,7 +93,7 @@ export default function PathMap({
     map.on("load", () => {
       map.addSource(SOURCE_ID, {
         type: "geojson",
-        data: pathsToFeatureCollection(pathsRef.current),
+        data: collectionWithStatus(pathsRef.current, statusesRef.current),
         promoteId: "id",
       });
 
@@ -101,7 +121,15 @@ export default function PathMap({
             "case",
             ["boolean", ["feature-state", "selected"], false],
             "#1d4ed8",
-            "#7c3aed",
+            [
+              "match",
+              ["get", "status"],
+              "inspected",
+              "#16a34a",
+              "issue",
+              "#d97706",
+              "#64748b",
+            ],
           ],
           "line-width": [
             "case",
@@ -157,7 +185,7 @@ export default function PathMap({
     const source = map.getSource(SOURCE_ID) as maplibregl.GeoJSONSource | undefined;
     if (!source) return;
 
-    source.setData(pathsToFeatureCollection(paths));
+    source.setData(collectionWithStatus(paths, statuses));
 
     if (!fittedRef.current) {
       const bounds = boundsFromPaths(paths);
@@ -166,7 +194,7 @@ export default function PathMap({
         fittedRef.current = true;
       }
     }
-  }, [paths]);
+  }, [paths, statuses]);
 
   useEffect(() => {
     const map = mapRef.current;
