@@ -1,20 +1,41 @@
-import type { PathStatus } from "../domain/inspection";
+import { PATH_TYPE_STYLES } from "../domain/path";
 
-const items: { status: PathStatus; label: string; colour: string }[] = [
-  { status: "not_inspected", label: "Not inspected", colour: "bg-slate-500" },
-  { status: "inspected", label: "Inspected", colour: "bg-green-600" },
-  { status: "issue", label: "Issue", colour: "bg-amber-500" },
-];
+const inspectionItems = [
+  { key: "not_inspected", label: "Not inspected", colour: "bg-slate-400", faded: true },
+  { key: "inspected", label: "Inspected", colour: "bg-slate-700" },
+  { key: "issue", label: "Issue", colour: "bg-fuchsia-600" },
+] as const;
 
 export default function MapLegend() {
   return (
-    <ul className="pointer-events-none absolute left-3 top-3 z-10 space-y-1 rounded-lg bg-white/90 px-3 py-2 text-xs text-slate-700 shadow">
-      {items.map((item) => (
-        <li key={item.status} className="flex items-center gap-2">
-          <span className={`h-2.5 w-5 rounded-sm ${item.colour}`} />
-          {item.label}
-        </li>
-      ))}
-    </ul>
+    <div className="pointer-events-none absolute right-14 top-3 z-10 max-w-[11.5rem] rounded-lg bg-white/90 px-3 py-2 text-xs text-slate-700 shadow">
+      <p className="font-medium text-slate-500">Path type</p>
+      <ul className="mt-1 space-y-1">
+        {PATH_TYPE_STYLES.map((item) => (
+          <li key={item.type} className="flex items-center gap-2">
+            <span
+              className="h-2.5 w-5 shrink-0 rounded-sm"
+              style={{
+                background: item.dashed
+                  ? `repeating-linear-gradient(90deg, ${item.colour} 0 4px, transparent 4px 7px)`
+                  : item.colour,
+              }}
+            />
+            {item.label}
+          </li>
+        ))}
+      </ul>
+      <p className="mt-2 font-medium text-slate-500">Inspection</p>
+      <ul className="mt-1 space-y-1">
+        {inspectionItems.map((item) => (
+          <li key={item.key} className="flex items-center gap-2">
+            <span
+              className={`h-2.5 w-5 rounded-sm ${item.colour} ${item.faded ? "opacity-40" : ""}`}
+            />
+            {item.label}
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

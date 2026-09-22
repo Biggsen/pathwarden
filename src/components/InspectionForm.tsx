@@ -12,33 +12,50 @@ function todayIsoDate(): string {
 interface InspectionFormProps {
   pathCode: string;
   saving: boolean;
-  onCancel: () => void;
-  onSave: (input: {
+  initial?: {
+    id: string;
     inspectedAt: string;
     condition: InspectionCondition;
     notes?: string;
+    reportedToEscc?: boolean;
+  };
+  onCancel: () => void;
+  onSave: (input: {
+    id?: string;
+    inspectedAt: string;
+    condition: InspectionCondition;
+    notes?: string;
+    reportedToEscc?: boolean;
   }) => Promise<void>;
 }
 
 export default function InspectionForm({
   pathCode,
   saving,
+  initial,
   onCancel,
   onSave,
 }: InspectionFormProps) {
-  const [inspectedAt, setInspectedAt] = useState(todayIsoDate);
-  const [condition, setCondition] = useState<InspectionCondition>("clear");
-  const [notes, setNotes] = useState("");
+  const [inspectedAt, setInspectedAt] = useState(
+    initial?.inspectedAt ?? todayIsoDate(),
+  );
+  const [condition, setCondition] = useState<InspectionCondition>(
+    initial?.condition ?? "clear",
+  );
+  const [notes, setNotes] = useState(initial?.notes ?? "");
   const [error, setError] = useState<string | null>(null);
+  const editing = initial != null;
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
     setError(null);
     try {
       await onSave({
+        id: initial?.id,
         inspectedAt,
         condition,
         notes: notes.trim() || undefined,
+        reportedToEscc: condition === "issue" && initial?.reportedToEscc === true,
       });
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : "Could not save inspection");
@@ -49,7 +66,7 @@ export default function InspectionForm({
     <form className="space-y-4" onSubmit={(event) => void handleSubmit(event)}>
       <div>
         <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
-          Record inspection
+          {editing ? "Edit inspection" : "Record inspection"}
         </p>
         <p className="mt-1 text-lg font-semibold">{pathCode}</p>
       </div>
@@ -114,7 +131,7 @@ export default function InspectionForm({
           className="flex-1 rounded-lg bg-slate-900 px-3 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-60"
           disabled={saving}
         >
-          {saving ? "Saving…" : "Save inspection"}
+          {saving ? "Saving…" : editing ? "Save changes" : "Save inspection"}
         </button>
       </div>
     </form>

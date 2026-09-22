@@ -1,4 +1,5 @@
 import type { Path, PathType } from "../domain/path";
+import { REPORTING_CODE_BY_PATH_NAME } from "./reportingCodes";
 
 interface EsccProperties {
   OBJECTID?: number;
@@ -9,36 +10,63 @@ interface EsccProperties {
 }
 
 function mapPathType(status?: string): PathType {
-  switch (status) {
-    case "Footpath":
+  switch (status?.trim().toLowerCase()) {
+    case "footpath":
       return "footpath";
-    case "Bridleway":
+    case "licensed footpath":
+    case "licenced footpath":
+      return "licensed_footpath";
+    case "bridleway":
       return "bridleway";
-    case "Restricted Byway":
+    case "licensed bridleway":
+    case "licenced bridleway":
+      return "licensed_bridleway";
+    case "restricted byway":
       return "restricted_byway";
-    case "BOAT":
+    case "boat":
       return "byway";
+    case "licensed cycleway":
+    case "licenced cycleway":
+      return "licensed_cycleway";
     default:
       return "unknown";
   }
 }
 
 /** "Hellingly 22a" → parish "Hellingly", number "22", letter "a" | undefined */
-function parsePathName(pathName: string): {
+export function parsePathName(pathName: string): {
   parish: string;
-  number: string;
+  number?: string;
   letter?: string;
 } {
-  const match = pathName.match(/^(.+?)\s+(\d+)([a-z])?$/i);
-  if (!match) {
-    throw new Error(`Unrecognised Path_Name: ${pathName}`);
+  const numbered = pathName.match(/^(.+?)\s+(\d+)([a-z])?$/i);
+  if (numbered) {
+    return {
+      parish: numbered[1],
+      number: numbered[2],
+      letter: numbered[3]?.toLowerCase(),
+    };
   }
 
-  return {
-    parish: match[1],
-    number: match[2],
-    letter: match[3]?.toLowerCase(),
-  };
+  const named = pathName.match(/\s[–-]\s+(.+?)$/);
+  if (named) {
+    return {
+      parish: named[1].replace(/\s+LB$/i, "").trim(),
+    };
+  }
+
+  return { parish: pathName };
+}
+
+export function pathNameBelongsToParish(pathName: string, parish: string): boolean {
+  const target = parish.trim().toLowerCase();
+  if (!target) return false;
+  if (parsePathName(pathName).parish.toLowerCase() === target) return true;
+  return new RegExp(`\\b${escapeRegExp(parish.trim())}\\b`, "i").test(pathName);
+}
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 function parishAbbreviation(parish: string): string {
@@ -53,10 +81,14 @@ function sectionFromLetter(letter?: string): number {
 
 /** Derive reporting-map style codes: Hellingly 49 → HEL/49/1, Hellingly 13d → HEL/13/4 */
 export function pathCodeFromPathName(pathName: string): string {
-  const { parish, number, letter } = parsePathName(pathName);
-  const abbrev = parishAbbreviation(parish);
-  const section = sectionFromLetter(letter);
-  return `${abbrev}/${number}/${section}`;
+  const mapped = REPORTING_CODE_BY_PATH_NAME[pathName];
+  if (mapped) return mapped;
+
+  const parsed = parsePathName(pathName);
+  if (!parsed.number) return pathName;
+  const abbrev = parishAbbreviation(parsed.parish);
+  const section = sectionFromLetter(parsed.letter);
+  return `${abbrev}/${parsed.number}/${section}`;
 }
 
 function isLineGeometry(

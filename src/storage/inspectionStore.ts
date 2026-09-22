@@ -3,13 +3,17 @@ import { DEV_USER_ID } from "../domain/inspection";
 
 const STORAGE_KEY = "pathwarden.inspections.v1";
 
+export type InspectionInput = Omit<
+  Inspection,
+  "id" | "createdAt" | "updatedAt" | "userId"
+> & {
+  userId?: string;
+};
+
 export interface InspectionStore {
   list(): Promise<Inspection[]>;
-  create(
-    input: Omit<Inspection, "id" | "createdAt" | "updatedAt" | "userId"> & {
-      userId?: string;
-    },
-  ): Promise<Inspection>;
+  create(input: InspectionInput): Promise<Inspection>;
+  update(id: string, input: InspectionInput): Promise<Inspection>;
 }
 
 interface StoredState {
@@ -45,6 +49,8 @@ export const localInspectionStore: InspectionStore = {
       inspectedAt: input.inspectedAt,
       condition: input.condition,
       notes: input.notes?.trim() ? input.notes.trim() : undefined,
+      reportedToEscc:
+        input.condition === "issue" && input.reportedToEscc === true,
       createdAt: now,
       updatedAt: now,
     };
@@ -53,5 +59,31 @@ export const localInspectionStore: InspectionStore = {
     state.inspections.push(inspection);
     writeState(state);
     return inspection;
+  },
+
+  async update(id, input) {
+    const state = readState();
+    const index = state.inspections.findIndex((inspection) => inspection.id === id);
+    if (index === -1) {
+      throw new Error("Inspection not found");
+    }
+
+    const current = state.inspections[index];
+    const now = new Date().toISOString();
+    const updated: Inspection = {
+      ...current,
+      pathId: input.pathId,
+      userId: input.userId ?? current.userId,
+      inspectedAt: input.inspectedAt,
+      condition: input.condition,
+      notes: input.notes?.trim() ? input.notes.trim() : undefined,
+      reportedToEscc:
+        input.condition === "issue" && input.reportedToEscc === true,
+      updatedAt: now,
+    };
+
+    state.inspections[index] = updated;
+    writeState(state);
+    return updated;
   },
 };

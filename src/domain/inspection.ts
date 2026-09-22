@@ -7,6 +7,8 @@ export interface Inspection {
   inspectedAt: string;
   condition: InspectionCondition;
   notes?: string;
+  /** Warden-marked only; not confirmation that ESCC received a report. */
+  reportedToEscc?: boolean;
   createdAt: string;
   updatedAt: string;
 }
@@ -45,6 +47,10 @@ export function latestInspection(
     }
     return a.createdAt < b.createdAt ? 1 : -1;
   })[0];
+}
+
+export function isReportedToEscc(inspection: Inspection): boolean {
+  return inspection.condition === "issue" && inspection.reportedToEscc === true;
 }
 
 export function pathStatusForYear(
