@@ -15,8 +15,6 @@ export interface Inspection {
 
 export type PathStatus = "not_inspected" | "inspected" | "issue";
 
-export const DEV_USER_ID = "dev-user";
-
 export function currentInspectionYear(now = new Date()): number {
   return now.getFullYear();
 }

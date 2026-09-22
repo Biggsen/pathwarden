@@ -14,12 +14,9 @@ import {
 } from "./domain/progress";
 import { pathsFromEsccFeatureCollection } from "./escc/adapter";
 import { fetchParishCatalog, fetchParishPaths } from "./escc/featureServer";
+import { inspectionStore } from "./storage/inspectionStore";
 import { fetchParishBoundary } from "./geo/parishBoundary";
-import { localInspectionStore } from "./storage/inspectionStore";
-import {
-  DEFAULT_PARISH,
-  localParishStore,
-} from "./storage/parishStore";
+import { DEFAULT_PARISH, parishStore } from "./storage/parishStore";
 import PathMap from "./components/PathMap";
 import PathDetails from "./components/PathDetails";
 import InspectionForm from "./components/InspectionForm";
@@ -27,15 +24,16 @@ import MapLegend from "./components/MapLegend";
 import Dashboard from "./components/Dashboard";
 import type { DashboardList } from "./components/Dashboard";
 import ParishPicker from "./components/ParishPicker";
+import { getSupabase } from "./storage/supabase";
 
 export default function App() {
   const year = currentInspectionYear();
-  const initialAssignment = localParishStore.read();
-  const [ownedParishes, setOwnedParishes] = useState(initialAssignment.owned);
-  const [activeParish, setActiveParish] = useState(initialAssignment.active);
+  const [ownedParishes, setOwnedParishes] = useState<string[]>([DEFAULT_PARISH]);
+  const [activeParish, setActiveParish] = useState(DEFAULT_PARISH);
+  const [profileReady, setProfileReady] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const [catalog, setCatalog] = useState<string[]>(
-    () => localParishStore.readCatalog() ?? [],
+    () => parishStore.readCatalog() ?? [],
   );
   const [catalogLoading, setCatalogLoading] = useState(false);
   const [catalogError, setCatalogError] = useState<string | null>(null);
@@ -80,15 +78,27 @@ export default function App() {
 
   useEffect(() => {
     let cancelled = false;
-    void localInspectionStore.list().then((stored) => {
-      if (!cancelled) setInspections(stored);
-    });
+    void Promise.all([parishStore.read(), inspectionStore.list()])
+      .then(([assignment, stored]) => {
+        if (cancelled) return;
+        setOwnedParishes(assignment.owned);
+        setActiveParish(assignment.active);
+        setInspections(stored);
+        setProfileReady(true);
+      })
+      .catch((error: unknown) => {
+        if (cancelled) return;
+        setLoadError(
+          error instanceof Error ? error.message : "Failed to load profile",
+        );
+      });
     return () => {
       cancelled = true;
     };
   }, []);
 
   useEffect(() => {
+    if (!profileReady) return;
     let cancelled = false;
 
     async function loadSampleFallback(): Promise<{
@@ -178,7 +188,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [activeParish]);
+  }, [activeParish, profileReady]);
 
   useEffect(() => {
     if (!pickerOpen || catalog.length > 0) return;
@@ -188,7 +198,7 @@ export default function App() {
     void fetchParishCatalog()
       .then((parishes) => {
         if (cancelled) return;
-        setCatalog(localParishStore.writeCatalog(parishes));
+        setCatalog(parishStore.writeCatalog(parishes));
       })
       .catch((error: unknown) => {
         if (cancelled) return;
@@ -231,7 +241,7 @@ export default function App() {
       const reportedToEscc =
         input.condition === "issue" && input.reportedToEscc === true;
       if (inspectionId) {
-        const updated = await localInspectionStore.update(inspectionId, {
+        const updated = await inspectionStore.update(inspectionId, {
           pathId: selectedPath.id,
           inspectedAt: input.inspectedAt,
           condition: input.condition,
@@ -244,7 +254,7 @@ export default function App() {
           ),
         );
       } else {
-        const created = await localInspectionStore.create({
+        const created = await inspectionStore.create({
           pathId: selectedPath.id,
           inspectedAt: input.inspectedAt,
           condition: input.condition,
@@ -265,7 +275,7 @@ export default function App() {
     if (!selectedPath || !latestThisYear) return;
     setSaving(true);
     try {
-      const updated = await localInspectionStore.update(latestThisYear.id, {
+      const updated = await inspectionStore.update(latestThisYear.id, {
         pathId: selectedPath.id,
         inspectedAt: latestThisYear.inspectedAt,
         condition: latestThisYear.condition,
@@ -301,15 +311,15 @@ export default function App() {
     }
   }
 
-  function switchParish(parishName: string) {
-    const next = localParishStore.setActive(parishName);
+  async function switchParish(parishName: string) {
+    const next = await parishStore.setActive(parishName);
     setOwnedParishes(next.owned);
     setActiveParish(next.active);
     setPickerOpen(false);
   }
 
-  function toggleOwnedParish(parishName: string, owned: boolean) {
-    const next = localParishStore.setOwned(parishName, owned);
+  async function toggleOwnedParish(parishName: string, owned: boolean) {
+    const next = await parishStore.setOwned(parishName, owned);
     setOwnedParishes(next.owned);
     setActiveParish(next.active);
   }
@@ -356,6 +366,15 @@ export default function App() {
             onClick={() => setShowDashboard((open) => !open)}
           >
             {showDashboard ? "Hide progress" : "Progress"}
+          </button>
+          <button
+            type="button"
+            className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            onClick={() => {
+              void getSupabase().auth.signOut();
+            }}
+          >
+            Sign out
           </button>
         </div>
       </header>

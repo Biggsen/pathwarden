@@ -1,4 +1,6 @@
-const ASSIGNMENT_KEY = "pathwarden.parishes.v1";
+import { getSupabase } from "./supabase";
+import { requireUserId } from "./auth";
+
 const CATALOG_KEY = "pathwarden.parish-catalog.v1";
 
 export const DEFAULT_PARISH = "Hellingly";
@@ -26,31 +28,7 @@ function uniqueSorted(names: string[]): string[] {
   return result.sort((a, b) => a.localeCompare(b, "en"));
 }
 
-function readAssignment(): ParishAssignment {
-  const raw = localStorage.getItem(ASSIGNMENT_KEY);
-  if (!raw) {
-    return { owned: [DEFAULT_PARISH], active: DEFAULT_PARISH };
-  }
-  try {
-    const parsed = JSON.parse(raw) as Partial<ParishAssignment>;
-    const owned = uniqueSorted(
-      Array.isArray(parsed.owned) ? parsed.owned : [DEFAULT_PARISH],
-    );
-    const ownedOrDefault = owned.length > 0 ? owned : [DEFAULT_PARISH];
-    const active =
-      typeof parsed.active === "string" &&
-      ownedOrDefault.some((name) => name.toLowerCase() === parsed.active!.toLowerCase())
-        ? ownedOrDefault.find(
-            (name) => name.toLowerCase() === parsed.active!.toLowerCase(),
-          ) ?? ownedOrDefault[0]
-        : ownedOrDefault[0];
-    return { owned: ownedOrDefault, active };
-  } catch {
-    return { owned: [DEFAULT_PARISH], active: DEFAULT_PARISH };
-  }
-}
-
-function writeAssignment(state: ParishAssignment): ParishAssignment {
+function normalize(state: ParishAssignment): ParishAssignment {
   const owned = uniqueSorted(state.owned);
   const ownedOrDefault = owned.length > 0 ? owned : [DEFAULT_PARISH];
   const active = ownedOrDefault.some(
@@ -60,18 +38,89 @@ function writeAssignment(state: ParishAssignment): ParishAssignment {
         (name) => name.toLowerCase() === state.active.toLowerCase(),
       ) ?? ownedOrDefault[0]
     : ownedOrDefault[0];
-  const next = { owned: ownedOrDefault, active };
-  localStorage.setItem(ASSIGNMENT_KEY, JSON.stringify(next));
+  return { owned: ownedOrDefault, active };
+}
+
+async function readAssignment(): Promise<ParishAssignment> {
+  const userId = await requireUserId();
+  const db = getSupabase();
+  const [{ data: profile, error: profileError }, { data: rows, error: ownedError }] =
+    await Promise.all([
+      db.from("profiles").select("active_parish").eq("id", userId).maybeSingle(),
+      db.from("parish_assignments").select("parish").eq("user_id", userId),
+    ]);
+  if (profileError) throw profileError;
+  if (ownedError) throw ownedError;
+  if (!profile) {
+    const { error: insertError } = await db.from("profiles").insert({
+      id: userId,
+      active_parish: DEFAULT_PARISH,
+    });
+    if (insertError) throw insertError;
+  }
+  const ownedNames = (rows ?? []).map((row) => String(row.parish));
+  if (ownedNames.length === 0) {
+    const { error: assignError } = await db.from("parish_assignments").insert({
+      user_id: userId,
+      parish: DEFAULT_PARISH,
+    });
+    if (assignError) throw assignError;
+  }
+  return normalize({
+    owned: ownedNames.length > 0 ? ownedNames : [DEFAULT_PARISH],
+    active: profile?.active_parish ?? DEFAULT_PARISH,
+  });
+}
+
+async function writeAssignment(state: ParishAssignment): Promise<ParishAssignment> {
+  const next = normalize(state);
+  const userId = await requireUserId();
+  const db = getSupabase();
+  const { error: profileError } = await db.from("profiles").upsert({
+    id: userId,
+    active_parish: next.active,
+    updated_at: new Date().toISOString(),
+  });
+  if (profileError) throw profileError;
+
+  const { data: currentRows, error: listError } = await db
+    .from("parish_assignments")
+    .select("parish")
+    .eq("user_id", userId);
+  if (listError) throw listError;
+
+  const current = uniqueSorted((currentRows ?? []).map((row) => String(row.parish)));
+  const toAdd = next.owned.filter(
+    (parish) => !current.some((name) => name.toLowerCase() === parish.toLowerCase()),
+  );
+  const toRemove = current.filter(
+    (parish) => !next.owned.some((name) => name.toLowerCase() === parish.toLowerCase()),
+  );
+
+  if (toAdd.length > 0) {
+    const { error } = await db.from("parish_assignments").insert(
+      toAdd.map((parish) => ({ user_id: userId, parish })),
+    );
+    if (error) throw error;
+  }
+  if (toRemove.length > 0) {
+    const { error } = await db
+      .from("parish_assignments")
+      .delete()
+      .eq("user_id", userId)
+      .in("parish", toRemove);
+    if (error) throw error;
+  }
   return next;
 }
 
-export const localParishStore = {
-  read(): ParishAssignment {
+export const parishStore = {
+  async read(): Promise<ParishAssignment> {
     return readAssignment();
   },
 
-  setActive(parish: string): ParishAssignment {
-    const current = readAssignment();
+  async setActive(parish: string): Promise<ParishAssignment> {
+    const current = await readAssignment();
     const owned = current.owned.some(
       (name) => name.toLowerCase() === parish.toLowerCase(),
     )
@@ -80,11 +129,13 @@ export const localParishStore = {
     return writeAssignment({ owned, active: parish });
   },
 
-  setOwned(parish: string, owned: boolean): ParishAssignment {
-    const current = readAssignment();
+  async setOwned(parish: string, owned: boolean): Promise<ParishAssignment> {
+    const current = await readAssignment();
     if (owned) {
-      const names = uniqueSorted([...current.owned, parish]);
-      return writeAssignment({ owned: names, active: parish });
+      return writeAssignment({
+        owned: uniqueSorted([...current.owned, parish]),
+        active: parish,
+      });
     }
     const remaining = current.owned.filter(
       (name) => name.toLowerCase() !== parish.toLowerCase(),
