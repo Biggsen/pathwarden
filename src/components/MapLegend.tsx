@@ -2,8 +2,8 @@ import { PATH_TYPE_STYLES } from "../domain/path";
 
 const inspectionItems = [
   { key: "not_inspected", label: "Not inspected", colour: "bg-slate-400", faded: true },
-  { key: "inspected", label: "Inspected", colour: "bg-slate-700" },
-  { key: "issue", label: "Issue", colour: "bg-fuchsia-600" },
+  { key: "inspected", label: "Inspected", colour: "bg-slate-700", faded: false },
+  { key: "issue", label: "Issue", colour: "bg-fuchsia-600", faded: false },
 ] as const;
 
 export default function MapLegend() {
