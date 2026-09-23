@@ -1,0 +1,12 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Refresh on any path still serves the app. Real files in dist/ win first.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
