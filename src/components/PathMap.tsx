@@ -58,11 +58,17 @@ const TYPE_COLOR_PAINT: maplibregl.ExpressionSpecification = [
   ],
 ];
 
+const PATH_WIDTH = 3.5;
+
 const LINE_WIDTH_PAINT: maplibregl.ExpressionSpecification = [
   "case",
-  ["boolean", ["feature-state", "selected"], false],
-  6,
-  3.5,
+  [
+    "all",
+    ["!", ["boolean", ["feature-state", "selected"], false]],
+    ["==", ["get", "status"], "issue"],
+  ],
+  2,
+  PATH_WIDTH,
 ];
 
 const LINE_OPACITY_PAINT: maplibregl.ExpressionSpecification = [
@@ -81,9 +87,9 @@ const CASE_COLOR_PAINT: maplibregl.ExpressionSpecification = [
 
 const CASE_WIDTH_PAINT: maplibregl.ExpressionSpecification = [
   "case",
-  ["boolean", ["feature-state", "selected"], false],
-  9,
-  ["match", ["get", "status"], "issue", 7, 0],
+  ["==", ["get", "status"], "issue"],
+  PATH_WIDTH,
+  0,
 ];
 
 const LICENSED_FILTER: maplibregl.FilterSpecification = [
@@ -418,5 +424,5 @@ export default function PathMap({
     map.fitBounds(bounds, { padding: 80, maxZoom: 16, duration: 600 });
   }, [focusPathId, focusNonce, paths]);
 
-  return <div ref={containerRef} className="h-full w-full" />;
+  return <div ref={containerRef} className="h-full w-full min-w-0 max-w-full overflow-hidden" />;
 }

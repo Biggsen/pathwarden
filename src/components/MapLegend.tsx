@@ -8,7 +8,7 @@ const inspectionItems = [
 
 export default function MapLegend() {
   return (
-    <div className="pointer-events-none absolute right-14 top-3 z-10 max-w-[11.5rem] rounded-lg bg-white/90 px-3 py-2 text-xs text-slate-700 shadow">
+    <div className="pointer-events-none absolute right-14 top-3 z-10 hidden max-w-[11.5rem] rounded-lg bg-white/90 px-3 py-2 text-xs text-slate-700 shadow sm:block">
       <p className="font-medium text-slate-500">Path type</p>
       <ul className="mt-1 space-y-1">
         {PATH_TYPE_STYLES.map((item) => (

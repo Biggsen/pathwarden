@@ -24,6 +24,12 @@ function statusLabel(status: PathStatus, year: number): string {
   return "Inspected";
 }
 
+function statusDotClass(status: PathStatus): string {
+  if (status === "issue") return "bg-fuchsia-600";
+  if (status === "inspected") return "bg-slate-700";
+  return "bg-rose-500";
+}
+
 interface PathDetailsProps {
   path: Path;
   year: number;
@@ -51,9 +57,66 @@ export default function PathDetails({
 }: PathDetailsProps) {
   const inspection = latestThisYear ?? lastInspection;
   const reported = latestThisYear ? isReportedToEscc(latestThisYear) : false;
+  const named = path.name && path.name !== path.pathCode ? path.name : null;
+  const history = inspection ? formatDate(inspection.inspectedAt) : null;
 
   return (
-    <div>
+    <>
+      <div className="sm:hidden">
+        <p className="truncate text-sm font-semibold text-slate-900">
+          {path.pathCode}
+          {named ? <span className="font-medium text-slate-700"> · {named}</span> : null}
+          {reported ? (
+            <span className="ml-2 align-middle rounded-full bg-emerald-700 px-1.5 py-0.5 text-[10px] font-medium text-white">
+              Reported
+            </span>
+          ) : null}
+        </p>
+        <p className="truncate text-sm text-slate-600">
+          {pathTypeLabel(path.type)} · {formatLength(path.lengthMetres)}
+        </p>
+        <p className="mt-1 flex items-center gap-1.5 text-sm text-slate-800">
+          <span className={`h-2 w-2 shrink-0 rounded-full ${statusDotClass(status)}`} />
+          <span className="min-w-0 truncate">
+            {statusLabel(status, year)}
+            {history ? ` · ${history}` : ""}
+          </span>
+        </p>
+        {latestThisYear?.notes ? (
+          <p className="mt-1 truncate text-xs text-slate-500">{latestThisYear.notes}</p>
+        ) : null}
+        <div className="mt-2 flex flex-col items-start gap-1 text-sm font-medium text-slate-900">
+          {onEdit ? (
+            <button type="button" className="text-left" onClick={onEdit}>
+              Edit inspection
+            </button>
+          ) : null}
+          <button type="button" className="text-left" onClick={onRecord}>
+            {onEdit ? "Record new inspection" : "Record inspection"}
+          </button>
+          {status === "issue" ? (
+            <a
+              href={ESCC_REPORTING_MAP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-left"
+            >
+              Report to East Sussex County Council
+            </a>
+          ) : null}
+          {status === "issue" && !reported && onMarkReported ? (
+            <button
+              type="button"
+              className="text-left disabled:opacity-60"
+              disabled={reporting}
+              onClick={onMarkReported}
+            >
+              Mark as reported
+            </button>
+          ) : null}
+        </div>
+      </div>
+      <div className="hidden sm:block">
       <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
         Path
       </p>
@@ -167,6 +230,7 @@ export default function PathDetails({
           report from Pathwarden.
         </p>
       ) : null}
-    </div>
+      </div>
+    </>
   );
 }

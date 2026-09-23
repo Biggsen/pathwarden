@@ -23,7 +23,7 @@ import InspectionForm from "./components/InspectionForm";
 import MapLegend from "./components/MapLegend";
 import Dashboard from "./components/Dashboard";
 import type { DashboardList } from "./components/Dashboard";
-import ParishPicker from "./components/ParishPicker";
+import AccountPage from "./components/AccountPage";
 import { getSupabase } from "./storage/supabase";
 
 export default function App() {
@@ -31,7 +31,8 @@ export default function App() {
   const [ownedParishes, setOwnedParishes] = useState<string[]>([DEFAULT_PARISH]);
   const [activeParish, setActiveParish] = useState(DEFAULT_PARISH);
   const [profileReady, setProfileReady] = useState(false);
-  const [pickerOpen, setPickerOpen] = useState(false);
+  const [catalogRequested, setCatalogRequested] = useState(false);
+  const [editParishes, setEditParishes] = useState(false);
   const [catalog, setCatalog] = useState<string[]>(
     () => parishStore.readCatalog() ?? [],
   );
@@ -52,7 +53,11 @@ export default function App() {
   );
   const [saving, setSaving] = useState(false);
   const [dashboardList, setDashboardList] = useState<DashboardList>(null);
-  const [showDashboard, setShowDashboard] = useState(true);
+  const [showDashboard, setShowDashboard] = useState(
+    () => window.matchMedia("(min-width: 640px)").matches,
+  );
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
 
   const statuses = useMemo(
     () => statusByPathId(inspections, year),
@@ -75,6 +80,15 @@ export default function App() {
   );
 
   const parish = activeParish;
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") setMenuOpen(false);
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
 
   useEffect(() => {
     let cancelled = false;
@@ -191,7 +205,7 @@ export default function App() {
   }, [activeParish, profileReady]);
 
   useEffect(() => {
-    if (!pickerOpen || catalog.length > 0) return;
+    if (!catalogRequested || catalog.length > 0) return;
     let cancelled = false;
     setCatalogLoading(true);
     setCatalogError(null);
@@ -214,7 +228,7 @@ export default function App() {
     return () => {
       cancelled = true;
     };
-  }, [pickerOpen, catalog.length]);
+  }, [catalogRequested, catalog.length]);
 
   const selectedInspections = selectedPath
     ? inspections.filter((inspection) => inspection.pathId === selectedPath.id)
@@ -315,7 +329,6 @@ export default function App() {
     const next = await parishStore.setActive(parishName);
     setOwnedParishes(next.owned);
     setActiveParish(next.active);
-    setPickerOpen(false);
   }
 
   async function toggleOwnedParish(parishName: string, owned: boolean) {
@@ -325,68 +338,194 @@ export default function App() {
   }
 
   return (
-    <div className="relative flex h-full flex-col bg-slate-100 text-slate-900">
-      <header className="z-10 flex items-center justify-between gap-3 border-b border-slate-200 bg-white px-4 py-3 shadow-sm">
-        <div>
-          <h1 className="text-lg font-semibold tracking-tight">Footpath Warden</h1>
+    <div className="relative flex h-full w-full min-w-0 max-w-full flex-col overflow-x-clip bg-slate-100 text-slate-900">
+      <div className="relative z-40 w-full min-w-0">
+        <header className="flex w-full min-w-0 items-center justify-between gap-3 border-b border-slate-200 bg-white px-3 py-2 shadow-sm sm:px-4 sm:py-3">
+          <div className="min-w-0 overflow-hidden">
+            <h1 className="text-lg font-semibold tracking-tight">Footpath Warden</h1>
+            <p className="truncate text-sm text-slate-500">{parish}</p>
+          </div>
           <button
             type="button"
-            className="text-sm text-slate-500 hover:text-slate-800"
-            onClick={() => setPickerOpen(true)}
-            aria-label="Choose parish"
+            className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 sm:hidden"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
           >
-            {parish} · {year} inspections
-          </button>
-        </div>
-        <div className="flex items-center gap-2">
-          {ownedParishes.length > 1 ? (
-            <label>
-              <span className="sr-only">Switch parish</span>
-              <select
-                className="max-w-32 rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm text-slate-800 sm:max-w-none"
-                value={activeParish}
-                onChange={(event) => switchParish(event.target.value)}
+            {menuOpen ? (
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                aria-hidden="true"
               >
-                {ownedParishes.map((name) => (
-                  <option key={name} value={name}>
-                    {name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          ) : null}
-          {paths.length > 0 ? (
-            <p className="hidden text-sm text-slate-600 sm:block">
-              {Math.round(metrics.pathCoveragePercentage)}% covered
-            </p>
-          ) : null}
-          <button
-            type="button"
-            className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
-            onClick={() => setShowDashboard((open) => !open)}
-          >
-            {showDashboard ? "Hide progress" : "Progress"}
+                <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+              </svg>
+            ) : (
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                aria-hidden="true"
+              >
+                <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+              </svg>
+            )}
           </button>
-          <button
-            type="button"
-            className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
-            onClick={() => {
-              void getSupabase().auth.signOut();
-            }}
+          <div className="hidden items-center gap-2 sm:flex">
+            {ownedParishes.length > 1 ? (
+              <label>
+                <span className="sr-only">Switch parish</span>
+                <select
+                  className="rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-sm text-slate-800"
+                  value={activeParish}
+                  onChange={(event) => switchParish(event.target.value)}
+                >
+                  {ownedParishes.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
+            {paths.length > 0 ? (
+              <p className="text-sm text-slate-600">
+                {Math.round(metrics.pathCoveragePercentage)}% covered
+              </p>
+            ) : null}
+            <button
+              type="button"
+              className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              onClick={() => setShowDashboard((open) => !open)}
+            >
+              {showDashboard ? "Hide progress" : "Progress"}
+            </button>
+            <button
+              type="button"
+              className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              onClick={() => setAccountOpen(true)}
+            >
+              Account
+            </button>
+            <button
+              type="button"
+              className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              onClick={() => {
+                void getSupabase().auth.signOut();
+              }}
+            >
+              Sign out
+            </button>
+          </div>
+        </header>
+        {menuOpen ? (
+          <div
+            id="mobile-menu"
+            className="absolute inset-x-0 top-full z-30 flex w-full min-w-0 max-w-full flex-col gap-2 border-b border-slate-200 bg-white px-4 py-3 shadow-md sm:hidden"
           >
-            Sign out
-          </button>
-        </div>
-      </header>
+            {ownedParishes.length > 1 ? (
+              <label className="min-w-0 text-sm">
+                <span className="mb-1 block font-medium text-slate-700">Parish</span>
+                <select
+                  className="w-full min-w-0 max-w-full rounded-lg border border-slate-200 bg-white px-2 py-2 text-base text-slate-800"
+                  value={activeParish}
+                  onChange={(event) => {
+                    setMenuOpen(false);
+                    void switchParish(event.target.value);
+                  }}
+                >
+                  {ownedParishes.map((name) => (
+                    <option key={name} value={name}>
+                      {name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
+            <button
+              type="button"
+              className="rounded-lg border border-slate-200 px-3 py-2 text-left text-sm font-medium text-slate-700 hover:bg-slate-50"
+              onClick={() => {
+                setShowDashboard((open) => !open);
+                setMenuOpen(false);
+              }}
+            >
+              {showDashboard ? "Hide progress" : "Progress"}
+            </button>
+            <button
+              type="button"
+              className="rounded-lg border border-slate-200 px-3 py-2 text-left text-sm font-medium text-slate-700 hover:bg-slate-50"
+              onClick={() => {
+                setMenuOpen(false);
+                setAccountOpen(true);
+              }}
+            >
+              Account
+            </button>
+            <button
+              type="button"
+              className="rounded-lg border border-slate-200 px-3 py-2 text-left text-sm font-medium text-slate-700 hover:bg-slate-50"
+              onClick={() => {
+                setMenuOpen(false);
+                void getSupabase().auth.signOut();
+              }}
+            >
+              Sign out
+            </button>
+          </div>
+        ) : null}
+      </div>
+      {menuOpen ? (
+        <button
+          type="button"
+          className="absolute inset-0 z-20 bg-slate-900/20 sm:hidden"
+          aria-label="Close menu"
+          onClick={() => setMenuOpen(false)}
+        />
+      ) : null}
 
-      <main className="relative min-h-0 flex-1">
+      <main className="relative min-h-0 w-full min-w-0 flex-1 overflow-x-clip">
+        {accountOpen ? (
+          <AccountPage
+            onClose={() => {
+              setAccountOpen(false);
+              setEditParishes(false);
+            }}
+            ownedParishes={ownedParishes}
+            catalog={catalog}
+            catalogLoading={catalogLoading}
+            catalogError={catalogError}
+            editParishes={editParishes}
+            onRequestCatalog={() => setCatalogRequested(true)}
+            onToggleOwned={(name, owned) => {
+              void toggleOwnedParish(name, owned);
+            }}
+          />
+        ) : null}
+        {pathsLoading && paths.length > 0 ? (
+          <p className="pointer-events-none absolute inset-x-0 top-3 z-20 text-center text-sm text-slate-600">
+            <span className="rounded-full bg-white/90 px-3 py-1 shadow">
+              Loading {parish}…
+            </span>
+          </p>
+        ) : null}
         {loadError ? (
           <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
             <p className="text-red-700">{loadError}</p>
             <button
               type="button"
               className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
-              onClick={() => setPickerOpen(true)}
+              onClick={() => {
+                setCatalogRequested(true);
+                setEditParishes(true);
+                setAccountOpen(true);
+              }}
             >
               Choose another parish
             </button>
@@ -401,7 +540,11 @@ export default function App() {
             <button
               type="button"
               className="rounded-lg border border-slate-200 px-3 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50"
-              onClick={() => setPickerOpen(true)}
+              onClick={() => {
+                setCatalogRequested(true);
+                setEditParishes(true);
+                setAccountOpen(true);
+              }}
             >
               Choose another parish
             </button>
@@ -448,7 +591,7 @@ export default function App() {
 
         {selectedPath ? (
           <aside
-            className="absolute inset-x-3 bottom-3 z-20 max-h-[70%] overflow-y-auto rounded-xl border border-slate-200 bg-white p-4 shadow-lg sm:inset-x-auto sm:right-3 sm:bottom-3 sm:w-80"
+            className="absolute inset-x-3 bottom-3 z-20 max-h-[70%] overflow-y-auto rounded-xl border border-slate-200 bg-white p-3 shadow-lg sm:inset-x-auto sm:right-3 sm:bottom-3 sm:w-80 sm:p-4"
             onPointerDown={(event) => event.stopPropagation()}
             onClick={(event) => event.stopPropagation()}
           >
@@ -499,13 +642,13 @@ export default function App() {
             )}
           </aside>
         ) : paths.length > 0 && !showDashboard ? (
-          <p className="pointer-events-none absolute inset-x-3 bottom-3 z-10 rounded-lg bg-white/90 px-3 py-2 text-center text-sm text-slate-600 shadow sm:inset-x-auto sm:left-3 sm:right-auto">
+          <p className="pointer-events-none absolute inset-x-3 bottom-3 z-10 hidden rounded-lg bg-white/90 px-3 py-2 text-center text-sm text-slate-600 shadow sm:inset-x-auto sm:left-3 sm:right-auto sm:block">
             Tap a path to record an inspection
           </p>
         ) : null}
       </main>
 
-      <footer className="border-t border-slate-200 bg-white px-4 py-2 text-xs text-slate-500">
+      <footer className="min-w-0 overflow-hidden border-t border-slate-200 bg-white px-4 py-2 text-xs text-slate-500">
         <p className="truncate sm:hidden">
           Guidance only — not the legal Definitive Map.
         </p>
@@ -517,26 +660,6 @@ export default function App() {
         </p>
       </footer>
 
-      {pathsLoading && paths.length > 0 ? (
-        <p className="pointer-events-none absolute inset-x-0 top-16 z-20 text-center text-sm text-slate-600">
-          <span className="rounded-full bg-white/90 px-3 py-1 shadow">
-            Loading {parish}…
-          </span>
-        </p>
-      ) : null}
-
-      {pickerOpen ? (
-        <ParishPicker
-          catalog={catalog}
-          owned={ownedParishes}
-          active={activeParish}
-          catalogLoading={catalogLoading}
-          catalogError={catalogError}
-          onClose={() => setPickerOpen(false)}
-          onSwitch={switchParish}
-          onToggleOwned={toggleOwnedParish}
-        />
-      ) : null}
     </div>
   );
 }
