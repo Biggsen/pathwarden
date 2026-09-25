@@ -9,6 +9,7 @@ const LINE_LAYER_ID = "paths-line";
 const DASHED_LAYER_ID = "paths-line-dashed";
 const CASE_LAYER_ID = "paths-case";
 const HIT_LAYER_ID = "paths-hit";
+const LABEL_LAYER_ID = "paths-label";
 const BOUNDARY_SOURCE_ID = "parish-boundary";
 const BOUNDARY_FILL_ID = "parish-boundary-fill";
 const BOUNDARY_LINE_ID = "parish-boundary-line";
@@ -308,6 +309,31 @@ export default function PathMap({
           "line-width": LINE_WIDTH_PAINT,
           "line-opacity": LINE_OPACITY_PAINT,
           "line-dasharray": [2.2, 1.6],
+        },
+      });
+
+      map.addLayer({
+        id: LABEL_LAYER_ID,
+        type: "symbol",
+        source: SOURCE_ID,
+        minzoom: 13,
+        layout: {
+          "symbol-placement": "line",
+          "symbol-spacing": 360,
+          "text-field": ["get", "pathCode"],
+          "text-font": ["Noto Sans Regular"],
+          "text-size": ["interpolate", ["linear"], ["zoom"], 13, 10, 16, 12],
+          "text-letter-spacing": 0.03,
+          "text-max-angle": 28,
+          "text-padding": 6,
+          "text-offset": [0, 0.9],
+          "text-keep-upright": true,
+        },
+        paint: {
+          "text-color": "#111827",
+          "text-halo-color": "#ffffff",
+          "text-halo-width": 1.4,
+          "text-halo-blur": 0.15,
         },
       });
 

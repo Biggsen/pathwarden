@@ -1,4 +1,5 @@
 import type { Path, PathType } from "../domain/path";
+import { parishCode } from "./parishCodes";
 import { REPORTING_CODE_BY_PATH_NAME } from "./reportingCodes";
 
 interface EsccProperties {
@@ -70,7 +71,9 @@ function escapeRegExp(value: string): string {
 }
 
 function parishAbbreviation(parish: string): string {
-  return parish.replace(/\s+/g, "").slice(0, 3).toUpperCase();
+  return (
+    parishCode(parish) ?? parish.replace(/\s+/g, "").slice(0, 3).toUpperCase()
+  );
 }
 
 /** Letter a or missing → 1, b → 2, ... */
@@ -79,7 +82,7 @@ function sectionFromLetter(letter?: string): number {
   return letter.charCodeAt(0) - "a".charCodeAt(0) + 1;
 }
 
-/** Derive reporting-map style codes: Hellingly 49 → HEL/49/1, Hellingly 13d → HEL/13/4 */
+/** Derive reporting-map codes: Hellingly 49 → HEL/49/1, Westham 12a → WSH/12/1 */
 export function pathCodeFromPathName(pathName: string): string {
   const mapped = REPORTING_CODE_BY_PATH_NAME[pathName];
   if (mapped) return mapped;
